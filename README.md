@@ -100,6 +100,3 @@ The app runs on `http://localhost:5000`
 - **LinkedIn**: [Ali Derar](https://www.linkedin.com/in/ali-derar-5679a8292)
 - **GitHub**: [ali-yaqoup](https://github.com/ali-yaqoup)
 
-## License
-
-MIT License - Feel free to use this as a template for your own portfolio!
