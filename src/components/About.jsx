@@ -129,7 +129,8 @@ const About = () => {
 
             {/* CV Download Button */}
             <motion.a
-              href="https://drive.google.com/file/d/1ruMH2JKlbYpDE5EtO28bDAc168mKXAZn/view?usp=sharing"
+              href={`${import.meta.env.BASE_URL}Ali_Yaqoub_CV.pdf`}
+              download="Ali_Yaqoub_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}

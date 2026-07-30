@@ -73,7 +73,8 @@ export default function Hero() {
 
           <div className="hero-text flex flex-wrap gap-4 mb-10">
             <a
-              href="https://drive.google.com/file/d/1ruMH2JKlbYpDE5EtO28bDAc168mKXAZn/view?usp=sharing"
+              href={`${import.meta.env.BASE_URL}Ali_Yaqoub_CV.pdf`}
+              download="Ali_Yaqoub_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >

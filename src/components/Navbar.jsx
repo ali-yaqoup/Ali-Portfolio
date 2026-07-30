@@ -89,7 +89,8 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             {/* CV Download Button - Desktop */}
             <a
-              href="https://drive.google.com/file/d/1ruMH2JKlbYpDE5EtO28bDAc168mKXAZn/view?usp=sharing"
+              href={`${import.meta.env.BASE_URL}Ali_Yaqoub_CV.pdf`}
+              download="Ali_Yaqoub_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
@@ -143,7 +144,8 @@ const Navbar = () => {
             
             {/* CV Download Button - Mobile */}
             <a
-              href="https://drive.google.com/file/d/1ruMH2JKlbYpDE5EtO28bDAc168mKXAZn/view?usp=sharing"
+              href={`${import.meta.env.BASE_URL}Ali_Yaqoub_CV.pdf`}
+              download="Ali_Yaqoub_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg mt-4"
