@@ -11,7 +11,7 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
       
-      // تحديث القسم النشط
+      // track the currently visible section
       const sections = ['home', 'about', 'services', 'skills', 'projects', 'internships', 'education', 'certifications', 'contact'];
       const scrollPosition = window.scrollY + 100;
       
@@ -32,15 +32,15 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { id: 'home', label: 'الرئيسية', icon: Home },
-    { id: 'about', label: 'نبذة عني', icon: User },
-    { id: 'services', label: 'الخدمات', icon: Briefcase },
-    { id: 'skills', label: 'المهارات', icon: Code },
-    { id: 'projects', label: 'المشاريع', icon: FileText },
-    { id: 'internships', label: 'الخبرات', icon: Briefcase },
-    { id: 'education', label: 'التعليم', icon: GraduationCap },
-    { id: 'certifications', label: 'الشهادات', icon: Award },
-    { id: 'contact', label: 'اتصل بي', icon: Mail },
+    { id: 'home', label: 'Home', icon: Home },
+    { id: 'about', label: 'About', icon: User },
+    { id: 'services', label: 'Services', icon: Briefcase },
+    { id: 'skills', label: 'Skills', icon: Code },
+    { id: 'projects', label: 'Projects', icon: FileText },
+    { id: 'internships', label: 'Experience', icon: Briefcase },
+    { id: 'education', label: 'Education', icon: GraduationCap },
+    { id: 'certifications', label: 'Certifications', icon: Award },
+    { id: 'contact', label: 'Contact', icon: Mail },
   ];
 
   return (
@@ -122,7 +122,7 @@ const Navbar = () => {
               className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg mt-4"
             >
               <Download className="w-5 h-5" />
-              تحميل السيرة الذاتية (PDF)
+              Download CV (PDF)
             </a>
           </div>
         </motion.div>
