@@ -85,10 +85,37 @@ const Navbar = () => {
             })}
           </div>
 
+          {/* Right Actions */}
+          <div className="flex items-center gap-2">
+            {/* CV Download Button - Desktop */}
+            <a
+              href="https://drive.google.com/file/d/1ruMH2JKlbYpDE5EtO28bDAc168mKXAZn/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full text-sm font-medium shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all"
+            >
+              <Download className="w-4 h-4" />
+              Download CV
+            </a>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              className="lg:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
         </div>
 
         {/* Mobile Menu */}
         <motion.div
+          id="mobile-menu"
           initial={false}
           animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
           transition={{ duration: 0.3 }}

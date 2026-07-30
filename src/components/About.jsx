@@ -90,7 +90,7 @@ const About = () => {
                 className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 whitespace-nowrap"
               >
                 <Check className="w-4 h-4" />
-                تم تغيير الصورة بنجاح
+                Photo updated successfully
               </motion.div>
             )}
           </div>
@@ -140,7 +140,7 @@ const About = () => {
               className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 group"
             >
               <Download className="w-5 h-5 group-hover:animate-bounce" />
-              تنزيل السيرة الذاتية
+              Download CV
             </motion.a>
           </div>
         </motion.div>

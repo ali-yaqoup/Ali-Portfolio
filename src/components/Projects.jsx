@@ -23,8 +23,8 @@ const Projects = () => {
 
   // تصنيفات المشاريع
   const categories = [
-    { id: 'all', name: 'جميع المشاريع', icon: Sparkles },
-    { id: 'featured', name: 'مميزة', icon: Code },
+    { id: 'all', name: 'All Projects', icon: Sparkles },
+    { id: 'featured', name: 'Featured', icon: Code },
     { id: 'fullstack', name: 'Full Stack', icon: Code },
     { id: 'frontend', name: 'Frontend', icon: Grid },
     { id: 'backend', name: 'Backend', icon: List },
@@ -46,13 +46,13 @@ const Projects = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            مشاريعي{' '}
+            Featured{' '}
             <span className="bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text">
-              المميزة
+              Projects
             </span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            مجموعة من المشاريع التي قمت بتطويرها باستخدام أحدث التقنيات
+            A selection of projects built with modern technologies
           </p>
         </motion.div>
 
@@ -108,7 +108,7 @@ const Projects = () => {
         <div className="flex flex-wrap gap-2 mb-8">
           <span className="text-gray-400 text-sm flex items-center gap-1">
             <Filter className="w-4 h-4" />
-            تصفية بالتقنية:
+            Filter by tech:
           </span>
           {allTechs.slice(0, 10).map((tech) => (
             <motion.button
@@ -168,7 +168,7 @@ const Projects = () => {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full font-semibold transition border border-gray-700 hover:border-indigo-500"
             >
-              عرض المزيد من المشاريع
+              Load more projects
             </motion.button>
           </motion.div>
         )}
@@ -240,7 +240,7 @@ const ProjectCard = ({ project, index, viewMode }) => {
         {project.featured && (
           <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
             <Sparkles className="w-3 h-3" />
-            مميز
+            Featured
           </div>
         )}
         
