@@ -7,8 +7,8 @@ export default function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 's12219814@stu.najah.edu',
-      href: 'mailto:s12219814@stu.najah.edu'
+      value: 'ali.yaqoub.software@gmail.com',
+      href: 'mailto:ali.yaqoub.software@gmail.com'
     },
     {
       icon: Phone,
