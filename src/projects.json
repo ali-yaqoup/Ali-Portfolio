@@ -1,42 +1,138 @@
 [
   {
+    "id": 7,
+    "title": "Lumixy - Service Provider Marketplace",
+    "description": "React Native marketplace app connecting customers with local service providers. Customers browse approved providers by category, providers complete a multi-step onboarding and track approval status, and admins review applications.",
+    "image": "https://images.unsplash.com/photo-1762769198239-fee17b640d39?w=600",
+    "technologies": [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Expo Router",
+      "React Navigation",
+      "Reanimated"
+    ],
+    "category": "frontend",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/lumixy-mobile",
+    "demo": "#",
+    "startDate": "04/2026",
+    "status": "Completed"
+  },
+  {
+    "id": 8,
+    "title": "Lumixy Backend - RESTful API",
+    "description": "Laravel REST API powering the Lumixy marketplace. Token-based authentication with Sanctum, multi-step provider onboarding, an admin approval workflow, work-gallery uploads, and paginated public endpoints.",
+    "image": "https://images.unsplash.com/photo-1778259205831-cf8f8bfebc80?w=600",
+    "technologies": [
+      "Laravel 12",
+      "PHP 8.2",
+      "MySQL",
+      "Laravel Sanctum",
+      "Laravel Mail",
+      "PHPUnit"
+    ],
+    "category": "backend",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/lumixy-api",
+    "demo": "#",
+    "startDate": "04/2026",
+    "status": "Completed"
+  },
+  {
     "id": 1,
     "title": "Technician Hiring Platform (THP)",
     "description": "Full-stack web application connecting job owners with skilled technicians. Job owners can post tasks, technicians browse opportunities and submit proposals. Features real-time messaging, notifications, and review system.",
     "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600",
-    "technologies": ["Angular", "Laravel", "MySQL", "Socket.io", "Real-time Messaging"],
+    "technologies": [
+      "Angular",
+      "Laravel",
+      "MySQL",
+      "Socket.io",
+      "Real-time Messaging"
+    ],
     "category": "fullstack",
     "featured": true,
-    "github": "https://github.com/ali-yaqoup/Project-THP",
+    "github": "https://github.com/ali-yaqoup/thp-hiring-platform-web",
     "demo": "#",
     "startDate": "2025",
     "status": "In Progress"
   },
   {
-    "id": 2,
-    "title": "Hotels and Flights Booking System",
-    "description": "Full-stack travel agency booking application. Developed secure user authentication module with registration and password reset features using Java, JavaFX for frontend, and MySQL database.",
-    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600",
-    "technologies": ["Java", "JavaFX", "MySQL", "Authentication"],
-    "category": "fullstack",
-    "featured": true,
-    "github": "https://github.com/ali-yaqoup/Advanced-Programming-Project",
+    "id": 9,
+    "title": "THP Backend - RESTful API",
+    "description": "Laravel REST API behind the Technician Hiring Platform, consumed by the Angular frontend. Three-role user system for employers, artisans and admins, two-step OTP login, signed email verification, and job and bidding endpoints.",
+    "image": "https://images.unsplash.com/photo-1743090660977-babf07732432?w=600",
+    "technologies": [
+      "Laravel 12",
+      "PHP 8.2",
+      "MySQL",
+      "Laravel Sanctum",
+      "OTP Auth",
+      "PHPUnit"
+    ],
+    "category": "backend",
+    "featured": false,
+    "github": "https://github.com/ali-yaqoup/thp-hiring-platform-api",
     "demo": "#",
-    "startDate": "09/2024",
-    "endDate": "11/2024",
+    "startDate": "05/2025",
     "status": "Completed"
+  },
+  {
+    "id": 10,
+    "title": "Ali Portfolio Website",
+    "description": "This portfolio: a responsive single-page site with an animated 3D background, scroll-driven motion, glassmorphism UI and a dark theme. Every section is driven from JSON data, so content stays easy to update.",
+    "image": "https://images.unsplash.com/photo-1558478551-1a378f63328e?w=600",
+    "technologies": [
+      "React 18",
+      "Vite",
+      "Three.js",
+      "GSAP",
+      "Framer Motion",
+      "Tailwind CSS"
+    ],
+    "category": "frontend",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/Ali-Portfolio",
+    "demo": "https://ali-yaqoup.github.io/Ali-Portfolio/",
+    "startDate": "02/2026",
+    "status": "In Progress"
   },
   {
     "id": 3,
     "title": "Time4Meds Mobile App Design",
     "description": "Designed comprehensive mobile app enabling patients to manage medications, access health content, and communicate with doctors. Focus on intuitive UI/UX with wireframing and prototyping.",
     "image": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600",
-    "technologies": ["Figma", "Canva", "UI/UX Design", "Wireframing"],
+    "technologies": [
+      "Figma",
+      "Canva",
+      "UI/UX Design",
+      "Wireframing"
+    ],
     "category": "frontend",
     "featured": true,
-    "github": "https://github.com/ali-yaqoup/MedTrack-UIUX",
+    "github": "https://github.com/ali-yaqoup/time4meds-ui-design",
     "demo": "#",
     "startDate": "11/2024",
+    "status": "Completed"
+  },
+  {
+    "id": 2,
+    "title": "Hotels and Flights Booking System",
+    "description": "Full-stack travel agency booking application. Developed secure user authentication module with registration and password reset features using Java, JavaFX for frontend, and MySQL database.",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600",
+    "technologies": [
+      "Java",
+      "JavaFX",
+      "MySQL",
+      "Authentication"
+    ],
+    "category": "fullstack",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/skyline-auth-module",
+    "demo": "#",
+    "startDate": "09/2024",
+    "endDate": "11/2024",
     "status": "Completed"
   },
   {
@@ -44,25 +140,33 @@
     "title": "Social Media Platform (Web 1 Project)",
     "description": "Basic responsive website built as part of the Web 1 course. Collaborated in a 3-member team to build two core pages of a social media platform with modern UI design.",
     "image": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600",
-    "technologies": ["React", "CSS", "Firebase"],
+    "technologies": [
+      "React",
+      "CSS",
+      "Firebase"
+    ],
     "category": "frontend",
     "featured": false,
-    "github": "https://github.com/ali-yaqoup/Web-dev-1",
+    "github": "https://github.com/ali-yaqoup/react-firebase-dashboard",
     "demo": "#",
     "startDate": "02/2023",
     "endDate": "04/2023",
     "status": "Completed"
-  }
-  ,
+  },
   {
     "id": 5,
     "title": "Quality Assurance Toolkit",
-    "description": "A collection of automated QA scripts and test plans for web applications including unit, integration, and end-to-end tests. Implemented CI test pipelines and reports.",
+    "description": "JUnit 5 test suite built for the Software Quality Assurance course, exercising unit-testing techniques against calculator, product, recipe-book, and user-service classes with parameterised and lifecycle-based tests.",
     "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80&auto=format&fit=crop",
-    "technologies": ["Selenium", "Jest", "Cypress", "GitHub Actions"],
+    "technologies": [
+      "Java",
+      "JUnit 5",
+      "Unit Testing",
+      "Test Design"
+    ],
     "category": "testing",
     "featured": false,
-    "github": "https://github.com/ali-yaqoup/Quality-Assurance",
+    "github": "https://github.com/ali-yaqoup/qa-junit5-testing",
     "demo": "#",
     "startDate": "03/2024",
     "status": "Completed"
@@ -70,14 +174,39 @@
   {
     "id": 6,
     "title": "Data Structures Practice",
-    "description": "Algorithms and data structures implementations and exercises in JavaScript and Java, with visualization utilities and performance benchmarks.",
+    "description": "Self-contained C++ programs covering core data structures and algorithms - stacks, queues, linked lists and trees - each with its own operations and complexity notes.",
     "image": "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600",
-    "technologies": ["Java", "JavaScript", "Algorithms"],
+    "technologies": [
+      "C++",
+      "Data Structures",
+      "Algorithms",
+      "Visual Studio"
+    ],
     "category": "algorithms",
     "featured": false,
-    "github": "https://github.com/ali-yaqoup/Data-Structures-Project",
+    "github": "https://github.com/ali-yaqoup/data-structures-cpp",
     "demo": "#",
     "startDate": "2023",
+    "status": "Completed"
+  },
+  {
+    "id": 11,
+    "title": "Udacity Projects Collection",
+    "description": "Four projects completed across Udacity courses: a multi-page HTML and CSS site, a SCSS and BEM portfolio build, a Python resume-analysis tool, and a JavaScript card game covered by automated tests.",
+    "image": "https://images.unsplash.com/photo-1616400619175-5beda3a17896?w=600",
+    "technologies": [
+      "HTML",
+      "SCSS",
+      "BEM",
+      "JavaScript",
+      "Python",
+      "Automated Testing"
+    ],
+    "category": "frontend",
+    "featured": false,
+    "github": "https://github.com/ali-yaqoup/udacity-projects",
+    "demo": "#",
+    "startDate": "03/2026",
     "status": "Completed"
   }
 ]

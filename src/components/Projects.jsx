@@ -28,6 +28,8 @@ const Projects = () => {
     { id: 'fullstack', name: 'Full Stack', icon: Code },
     { id: 'frontend', name: 'Frontend', icon: Grid },
     { id: 'backend', name: 'Backend', icon: List },
+    { id: 'testing', name: 'Testing', icon: Filter },
+    { id: 'algorithms', name: 'Algorithms', icon: Code },
   ];
 
   return (
