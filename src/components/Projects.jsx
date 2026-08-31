@@ -1,155 +1,137 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ExternalLink, Code, Sparkles, Filter, Grid, List } from 'lucide-react';
+import { Github, ExternalLink, Sparkles, Filter, Grid, List } from 'lucide-react';
+import SectionHeading from './SectionHeading';
 import projectsData from '../projects.json';
+
+const hasRealLink = (url) => Boolean(url) && url !== '#';
 
 const Projects = () => {
   const [filter, setFilter] = useState('all');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid');
   const [visibleProjects, setVisibleProjects] = useState(6);
   const [selectedTech, setSelectedTech] = useState(null);
 
-  // استخراج كل التقنيات المستخدمة
   const projects = Array.isArray(projectsData) ? projectsData : projectsData.projects || [];
-  const allTechs = [...new Set(projects.flatMap(p => p.technologies))].sort();
-  
-  // فلترة المشاريع
-  const filteredProjects = projects.filter(project => {
-    if (filter === 'all') return true;
-    if (filter === 'featured') return project.featured;
-    if (selectedTech) return project.technologies.includes(selectedTech);
-    return project.category === filter;
-  });
+  const allTechs = [...new Set(projects.flatMap((p) => p.technologies))].sort();
 
-  // تصنيفات المشاريع
+  const filteredProjects = useMemo(() => {
+    return projects.filter((project) => {
+      if (selectedTech && !project.technologies.includes(selectedTech)) return false;
+      if (filter === 'all') return true;
+      if (filter === 'featured') return project.featured;
+      return project.category === filter;
+    });
+  }, [projects, filter, selectedTech]);
+
   const categories = [
-    { id: 'all', name: 'All Projects', icon: Sparkles },
-    { id: 'featured', name: 'Featured', icon: Code },
-    { id: 'fullstack', name: 'Full Stack', icon: Code },
-    { id: 'frontend', name: 'Frontend', icon: Grid },
-    { id: 'backend', name: 'Backend', icon: List },
-    { id: 'testing', name: 'Testing', icon: Filter },
-    { id: 'algorithms', name: 'Algorithms', icon: Code },
+    { id: 'all', name: 'All' },
+    { id: 'featured', name: 'Featured' },
+    { id: 'fullstack', name: 'Full Stack' },
+    { id: 'frontend', name: 'Frontend' },
+    { id: 'backend', name: 'Backend' },
+    { id: 'testing', name: 'Testing' },
+    { id: 'algorithms', name: 'Algorithms' },
   ];
 
   return (
-    <section id="projects" className="relative py-20 bg-gray-900 overflow-hidden">
-      {/* خلفية متحركة */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-600 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-600 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <section id="projects" className="relative py-24 overflow-hidden section-gradient">
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-600 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-violet-600 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Featured{' '}
-            <span className="bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text">
-              Projects
-            </span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            A selection of projects built with modern technologies
-          </p>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <SectionHeading
+          kicker="Selected work"
+          icon={Sparkles}
+          title="Featured"
+          accent="Projects"
+          subtitle="A mix of full-stack products, APIs, mobile apps, and course work."
+        />
 
-        {/* شريط التصفية */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              return (
-                <motion.button
-                  key={cat.id}
-                  onClick={() => {
-                    setFilter(cat.id);
-                    setSelectedTech(null);
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`px-5 py-2.5 rounded-full flex items-center gap-2 transition-all ${
-                    filter === cat.id
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-500/30'
-                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  {cat.name}
-                </motion.button>
-              );
-            })}
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => {
+                  setFilter(cat.id);
+                  setVisibleProjects(6);
+                }}
+                className={`px-4 py-2 rounded-full text-sm transition-all ${
+                  filter === cat.id
+                    ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20'
+                    : 'bg-white/5 text-slate-300 hover:bg-white/10'
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
           </div>
 
-          {/* تغيير طريقة العرض */}
-          <div className="flex gap-2 bg-gray-800 p-1 rounded-lg">
+          <div className="flex gap-2 bg-white/5 p-1 rounded-lg">
             <button
+              type="button"
+              aria-label="Grid view"
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded transition ${
-                viewMode === 'grid' ? 'bg-indigo-600 text-white' : 'text-gray-400'
-              }`}
+              className={`p-2 rounded transition ${viewMode === 'grid' ? 'bg-indigo-600 text-white' : 'text-slate-400'}`}
             >
               <Grid className="w-5 h-5" />
             </button>
             <button
+              type="button"
+              aria-label="List view"
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded transition ${
-                viewMode === 'list' ? 'bg-indigo-600 text-white' : 'text-gray-400'
-              }`}
+              className={`p-2 rounded transition ${viewMode === 'list' ? 'bg-indigo-600 text-white' : 'text-slate-400'}`}
             >
               <List className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* فلترة التقنيات */}
         <div className="flex flex-wrap gap-2 mb-8">
-          <span className="text-gray-400 text-sm flex items-center gap-1">
+          <span className="text-slate-400 text-sm flex items-center gap-1">
             <Filter className="w-4 h-4" />
-            Filter by tech:
+            Tech:
           </span>
-          {allTechs.slice(0, 10).map((tech) => (
-            <motion.button
+          {allTechs.slice(0, 12).map((tech) => (
+            <button
               key={tech}
+              type="button"
               onClick={() => {
                 setSelectedTech(selectedTech === tech ? null : tech);
-                setFilter('all');
+                setVisibleProjects(6);
               }}
-              whileHover={{ scale: 1.05 }}
               className={`px-3 py-1 text-sm rounded-full transition ${
                 selectedTech === tech
                   ? 'bg-indigo-600 text-white'
-                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  : 'bg-white/5 text-slate-300 hover:bg-white/10'
               }`}
             >
               {tech}
-            </motion.button>
+            </button>
           ))}
         </div>
 
-        {/* شبكة المشاريع */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={viewMode + filter + selectedTech}
-            initial={{ opacity: 0, y: 20 }}
+            key={`${viewMode}-${filter}-${selectedTech}`}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className={`
-              ${viewMode === 'grid' 
-                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' 
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.25 }}
+            className={
+              viewMode === 'grid'
+                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
                 : 'flex flex-col gap-4'
-              }
-            `}
+            }
           >
             {filteredProjects.slice(0, visibleProjects).map((project, index) => (
-              <ProjectCard 
-                key={project.id} 
-                project={project} 
+              <ProjectCard
+                key={project.id}
+                project={project}
                 index={index}
                 viewMode={viewMode}
               />
@@ -157,63 +139,81 @@ const Projects = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* زر عرض المزيد */}
+        {filteredProjects.length === 0 && (
+          <p className="text-center text-slate-400 mt-10">No projects match this filter yet.</p>
+        )}
+
         {visibleProjects < filteredProjects.length && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-center mt-12"
-          >
-            <motion.button
-              onClick={() => setVisibleProjects(prev => prev + 3)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full font-semibold transition border border-gray-700 hover:border-indigo-500"
+          <div className="text-center mt-12">
+            <button
+              type="button"
+              onClick={() => setVisibleProjects((prev) => prev + 3)}
+              className="px-8 py-3 glass rounded-full font-semibold hover:border-indigo-400/50 transition"
             >
               Load more projects
-            </motion.button>
-          </motion.div>
+            </button>
+          </div>
         )}
       </div>
     </section>
   );
 };
 
-// كرت المشروع المحسن
-const ProjectCard = ({ project, index, viewMode }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const ProjectLinks = ({ project, compact = false }) => (
+  <div className={`flex gap-3 ${compact ? '' : ''}`}>
+    {hasRealLink(project.github) && (
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${project.title} GitHub`}
+        className="p-2 bg-white/10 hover:bg-white/20 rounded-lg transition"
+      >
+        <Github className="w-5 h-5 text-white" />
+      </a>
+    )}
+    {hasRealLink(project.demo) && (
+      <a
+        href={project.demo}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${project.title} live demo`}
+        className="p-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg transition"
+      >
+        <ExternalLink className="w-5 h-5 text-white" />
+      </a>
+    )}
+  </div>
+);
 
+const ProjectCard = ({ project, index, viewMode }) => {
   if (viewMode === 'list') {
     return (
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
+        initial={{ opacity: 0, x: -16 }}
         whileInView={{ opacity: 1, x: 0 }}
-        transition={{ delay: index * 0.1 }}
-        whileHover={{ x: 10 }}
-        className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 hover:border-indigo-500 transition-all group"
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.05 }}
+        className="glass rounded-xl p-6 hover:border-indigo-400/40 transition-all"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-            <p className="text-gray-400 mb-3">{project.description}</p>
+            <div className="flex items-center gap-2 mb-2">
+              <h3 className="text-xl font-bold text-white">{project.title}</h3>
+              {project.featured && (
+                <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">Featured</span>
+              )}
+            </div>
+            <p className="text-slate-400 mb-3">{project.description}</p>
             <div className="flex flex-wrap gap-2">
-              {project.technologies.slice(0, 4).map((tech) => (
-                <span key={tech} className="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">
+              {project.technologies.slice(0, 5).map((tech) => (
+                <span key={tech} className="px-3 py-1 bg-white/5 text-slate-300 text-xs rounded-full">
                   {tech}
                 </span>
               ))}
             </div>
           </div>
-          <div className="flex gap-3 mr-4">
-            <a href={project.github} target="_blank" rel="noopener noreferrer" 
-               className="p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition">
-              <Github className="w-5 h-5 text-gray-300" />
-            </a>
-            <a href={project.demo} target="_blank" rel="noopener noreferrer"
-               className="p-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition">
-              <ExternalLink className="w-5 h-5 text-white" />
-            </a>
-          </div>
+          <ProjectLinks project={project} />
         </div>
       </motion.div>
     );
@@ -221,61 +221,38 @@ const ProjectCard = ({ project, index, viewMode }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -10 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="group relative bg-gray-800/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-indigo-500 transition-all"
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: index * 0.06 }}
+      className="group relative glass rounded-xl overflow-hidden hover:border-indigo-400/40 transition-all hover:-translate-y-1"
     >
-      {/* صورة المشروع */}
       <div className="relative h-48 overflow-hidden">
-        <img 
-          src={project.image} 
-          alt={project.title}
+        <img
+          src={project.image}
+          alt=""
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-60"></div>
-        
-        {/* شارة Featured */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#070712] to-transparent opacity-70" />
         {project.featured && (
-          <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
             <Sparkles className="w-3 h-3" />
             Featured
           </div>
         )}
-        
-        {/* روابط المشروع - تظهر عند التحويم */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-          className="absolute inset-0 bg-black/70 flex items-center justify-center gap-4"
-        >
-          <a href={project.github} target="_blank" rel="noopener noreferrer"
-             className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full transform hover:scale-110 transition">
-            <Github className="w-6 h-6 text-white" />
-          </a>
-          <a href={project.demo} target="_blank" rel="noopener noreferrer"
-             className="p-3 bg-indigo-600 hover:bg-indigo-700 rounded-full transform hover:scale-110 transition">
-            <ExternalLink className="w-6 h-6 text-white" />
-          </a>
-        </motion.div>
+        <div className="absolute bottom-4 right-4">
+          <ProjectLinks project={project} />
+        </div>
       </div>
 
-      {/* محتوى الكرت */}
       <div className="p-6">
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-400 transition">
+        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-indigo-300 transition">
           {project.title}
         </h3>
-        <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-          {project.description}
-        </p>
-        
-        {/* التقنيات */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.technologies.map((tech) => (
-            <span key={tech} className="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">
+        <p className="text-slate-400 text-sm mb-4 line-clamp-3">{project.description}</p>
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.slice(0, 5).map((tech) => (
+            <span key={tech} className="px-2 py-1 bg-white/5 text-slate-300 text-xs rounded-full">
               {tech}
             </span>
           ))}

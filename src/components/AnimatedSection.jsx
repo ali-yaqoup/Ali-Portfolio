@@ -47,7 +47,7 @@ export default function AnimatedSection({
     
     const anim = animations[animation] || animations.fadeUp
     
-    gsap.fromTo(el, anim.from, {
+    const tween = gsap.fromTo(el, anim.from, {
       ...anim.to,
       duration,
       delay,
@@ -60,7 +60,8 @@ export default function AnimatedSection({
     })
     
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      tween.scrollTrigger?.kill()
+      tween.kill()
     }
   }, [animation, delay, duration])
   
@@ -80,7 +81,7 @@ export function StaggerChildren({ children, className = "", stagger = 0.1 }) {
     
     const items = el.children
     
-    gsap.fromTo(items, 
+    const tween = gsap.fromTo(items, 
       { opacity: 0, y: 40 },
       {
         opacity: 1,
@@ -97,7 +98,8 @@ export function StaggerChildren({ children, className = "", stagger = 0.1 }) {
     )
     
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      tween.scrollTrigger?.kill()
+      tween.kill()
     }
   }, [stagger])
   

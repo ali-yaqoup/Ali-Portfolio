@@ -10,23 +10,32 @@ import EducationSection from './sections/EducationSection';
 import CertificationsSection from './sections/CertificationsSection';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Scene3D from './components/Scene3D';
+import { ScrollProgress, BackToTop } from './components/ScrollChrome';
 
 function App() {
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="bg-[#070712] min-h-screen relative">
+      <a
+        href="#home"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[70] focus:px-4 focus:py-2 focus:bg-indigo-600 focus:rounded-lg"
+      >
+        Skip to content
+      </a>
+      <ScrollProgress />
       <Navbar />
-      <Scene3D />
-      <Hero />
-      <About />
-      <Services />
-      <Skills />
-      <Projects />
-      <InternshipsSection />
-      <EducationSection />
-      <CertificationsSection />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Skills />
+        <Projects />
+        <InternshipsSection />
+        <EducationSection />
+        <CertificationsSection />
+        <Contact />
+      </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

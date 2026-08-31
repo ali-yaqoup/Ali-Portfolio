@@ -1,7 +1,7 @@
 [
   {
     "title": "Frontend Frameworks",
-    "skills": ["React", "Angular", "Bootstrap", "Tailwind CSS", "CSS3", "HTML5"]
+    "skills": ["React", "React Native", "Expo", "Angular", "Bootstrap", "Tailwind CSS", "CSS3", "HTML5"]
   },
   {
     "title": "Programming Languages",
@@ -13,7 +13,7 @@
   },
   {
     "title": "Tools & Technologies",
-    "skills": ["Git", "Socket.io", "Real-time Communication", "Authentication", "REST APIs"]
+    "skills": ["Git", "Socket.io", "REST APIs", "Authentication", "Selenium", "Playwright", "JUnit"]
   },
   {
     "title": "Design & UI/UX",
