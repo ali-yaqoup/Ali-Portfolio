@@ -2,15 +2,18 @@
   {
     "name": "Java Fundamentals",
     "organization": "DataCamp",
-    "year": "2026",
-    "verified": true
+    "year": "Jan 2026",
+    "verified": true,
+    "file": "certificates/java-fundamentals-datacamp.pdf"
   },
   {
     "name": "Climate Justice: From Inequality to Inclusion",
     "organization": "CliVEx",
     "year": "Jan 2026",
     "verified": true,
-    "distinction": true
+    "distinction": true,
+    "file": "certificates/climate-justice-clivex.pdf",
+    "href": "https://openbadgefactory.com/obv3/credentials/8acedef4ec139a7b8240a9315b96a2e8ba72af84"
   },
   {
     "name": "Frontend Development Certificate",
@@ -19,9 +22,39 @@
     "verified": true
   },
   {
-    "name": "ChatGPT Fundamentals",
+    "name": "Understanding ChatGPT",
     "organization": "DataCamp",
-    "year": "2026",
-    "verified": true
+    "year": "Jan 2026",
+    "verified": true,
+    "file": "certificates/chatgpt-datacamp.pdf"
+  },
+  {
+    "name": "Understanding Prompt Engineering",
+    "organization": "DataCamp",
+    "year": "Jan 2026",
+    "verified": true,
+    "file": "certificates/chatgpt-datacamp.pdf"
+  },
+  {
+    "name": "Business English: B2",
+    "organization": "Verbivore",
+    "year": "Nov 2025",
+    "verified": true,
+    "file": "certificates/business-english-b2.pdf"
+  },
+  {
+    "name": "Introduction to HTML, CSS, & JavaScript",
+    "organization": "IBM · Coursera",
+    "year": "Mar 2026",
+    "verified": true,
+    "file": "certificates/ibm-html-css-javascript-coursera.pdf",
+    "href": "https://coursera.org/verify/IT85Y6TDWCYM"
+  },
+  {
+    "name": "Git and GitHub",
+    "organization": "Almdrasa",
+    "year": "2025",
+    "verified": true,
+    "file": "certificates/git-github-almdrasa.png"
   }
 ]
