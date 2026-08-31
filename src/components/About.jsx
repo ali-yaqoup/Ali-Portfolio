@@ -1,148 +1,96 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Camera, Check, Edit2 } from 'lucide-react';
-import profileImg from '/profile.jpeg'; // الصورة الافتراضية
+import { Download, FolderGit2, Award, Briefcase, GraduationCap } from 'lucide-react';
+import { CV_HREF, PROFILE, PROFILE_IMAGE } from '../constants';
+import projectsData from '../projects.json';
+import certificationsData from '../certifications.json';
+import internshipsData from '../internships.json';
 
 const About = () => {
-  const [profileImage, setProfileImage] = useState(profileImg);
-  const [showUploadSuccess, setShowUploadSuccess] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
+  const [imageSrc, setImageSrc] = useState(PROFILE_IMAGE);
+  const projects = Array.isArray(projectsData) ? projectsData : [];
 
-  // تحميل الصورة من LocalStorage عند بدء التشغيل
-  useEffect(() => {
-    const savedImage = localStorage.getItem('profileImage');
-    if (savedImage) {
-      setProfileImage(savedImage);
-    }
-  }, []);
-
-  // دالة تغيير الصورة
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const imageData = reader.result;
-        setProfileImage(imageData);
-        localStorage.setItem('profileImage', imageData);
-        
-        // إظهار رسالة النجاح
-        setShowUploadSuccess(true);
-        setTimeout(() => setShowUploadSuccess(false), 3000);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const stats = [
+    { icon: FolderGit2, value: `${projects.length}+`, label: 'Projects' },
+    { icon: Briefcase, value: `${internshipsData.length}`, label: 'Internships' },
+    { icon: Award, value: `${certificationsData.length}`, label: 'Certificates' },
+    { icon: GraduationCap, value: '4th', label: 'Year student' },
+  ];
 
   return (
-    <section id="about" className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-900 via-[#0a0f3d] to-[#141b6b]">
-      <div className="container mx-auto px-4">
+    <section id="about" className="relative py-24 overflow-hidden section-gradient">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center gap-12"
+          className="flex flex-col lg:flex-row items-center gap-14"
         >
-          {/* صورة البروفايل - مع تأثيرات تفاعلية */}
-          <div className="relative group">
+          <div className="relative">
             <motion.div
-              animate={{ 
-                y: [0, -10, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden ring-4 ring-indigo-500/50 ring-offset-4 ring-offset-gray-900"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden ring-4 ring-indigo-500/40 ring-offset-4 ring-offset-[#070712]"
             >
-              <img 
-                src={profileImage} 
-                alt="Ali Yaqoub" 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              <img
+                src={imageSrc}
+                alt={PROFILE.name}
+                className="w-full h-full object-cover"
+                onError={() => setImageSrc('')}
               />
-              
-              {/* Overlay عند التحويم */}
-              <div 
-                className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => setIsHovering(false)}
-              >
-                <label className="cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full transition-all transform hover:scale-110">
-                  <Camera className="w-6 h-6" />
-                  <input 
-                    type="file" 
-                    accept="image/*" 
-                    onChange={handleImageChange} 
-                    className="hidden" 
-                  />
-                </label>
-              </div>
+              {!imageSrc && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-600 to-cyan-500 text-5xl font-bold">
+                  AY
+                </div>
+              )}
             </motion.div>
-
-            {/* Badge النجاح */}
-            {showUploadSuccess && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center gap-2 whitespace-nowrap"
-              >
-                <Check className="w-4 h-4" />
-                Photo updated successfully
-              </motion.div>
-            )}
           </div>
 
-          {/* باقي محتوى الـ About */}
-          <div className="flex-1 text-center md:text-left">
-            <motion.h2 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
-            >
-              Ali{' '}
-              <span className="bg-gradient-to-r from-indigo-400 to-purple-400 text-transparent bg-clip-text">
-                Yaqoub
-              </span>
-            </motion.h2>
-            
-            <motion.p 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-xl text-gray-300 mb-6"
-            >
-              Software Engineering Student • Full Stack Developer • UI/UX Enthusiast
-            </motion.p>
-            
-            <motion.p 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0"
-            >
-              I'm Ali Derar Ali Yaqoub, a fourth-year Software Engineering student at An-Najah National University. I'm passionate about technology and enjoy solving problems through logical thinking and creativity. I aim to become a programmer who combines technical skills with creativity to build digital solutions that are both useful and enjoyable to use. My expertise spans full-stack development, modern web technologies, and UI/UX design.
-            </motion.p>
+          <div className="flex-1 text-center lg:text-left">
+            <p className="text-indigo-300 font-medium mb-3">About me</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              {PROFILE.shortName}{' '}
+              <span className="text-gradient">Yaqoub</span>
+            </h2>
 
-            {/* CV Download Button */}
-            <motion.a
-              href={`${import.meta.env.BASE_URL}Ali_Yaqoub_CV.pdf`}
+            <p className="text-xl text-slate-300 mb-6">
+              Software Engineering Student · Full Stack Developer · UI/UX Enthusiast
+            </p>
+
+            <p className="text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              I'm {PROFILE.fullName}, a fourth-year Software Engineering student at {PROFILE.university}.
+              I enjoy turning messy problems into clean products — from Laravel APIs and React interfaces
+              to mobile marketplaces and thoughtful UI. I care about code that holds up, and experiences
+              people actually like using.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+              {stats.map(({ icon: Icon, value, label }) => (
+                <div key={label} className="glass rounded-2xl p-4 text-center">
+                  <Icon className="w-5 h-5 mx-auto mb-2 text-indigo-400" />
+                  <p className="text-2xl font-bold text-white">{value}</p>
+                  <p className="text-xs text-slate-400">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-8">
+              <span className="px-3 py-1 rounded-full glass text-sm text-slate-300">Arabic — Native</span>
+              <span className="px-3 py-1 rounded-full glass text-sm text-slate-300">English — Professional</span>
+              <span className="px-3 py-1 rounded-full glass text-sm text-slate-300">{PROFILE.location}</span>
+            </div>
+
+            <a
+              href={CV_HREF}
               download="Ali_Yaqoub_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 group"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5 transition-all duration-300"
             >
-              <Download className="w-5 h-5 group-hover:animate-bounce" />
+              <Download className="w-5 h-5" />
               Download CV
-            </motion.a>
+            </a>
           </div>
         </motion.div>
       </div>

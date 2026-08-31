@@ -1,41 +1,32 @@
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
+import { PROFILE } from "../constants";
 
 export default function Footer() {
-  const obj = [
-    {
-      icon: Github,
-      label: "GitHub",
-      color: "hover:border-gray-400",
-      href: "https://github.com/ali-yaqoup",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      color: "hover:border-blue-500",
-      href: "https://www.linkedin.com/in/ali-derar-5679a8292",
-    },
-    {
-      icon: Twitter,
-      label: "Twitter",
-      color: "hover:border-sky-400",
-      href: "https://x.com/ali_yaqoub",
-    }
+  const year = new Date().getFullYear();
+  const links = [
+    { icon: Github, href: PROFILE.github, label: "GitHub" },
+    { icon: Linkedin, href: PROFILE.linkedin, label: "LinkedIn" },
+    { icon: Mail, href: `mailto:${PROFILE.email}`, label: "Email" },
   ];
+
   return (
     <footer className="py-8 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-        <a href="#home" className="text-xl font-bold">
-          <span className="text-gradient">Ali Yaqoub</span>
+        <a href="#home" className="text-xl font-bold text-gradient">
+          {PROFILE.name}
         </a>
-        <p className="text-[var(--body-text)] text-sm">
-          © 2026 Ali Yaqoub. Crafted with passion and precision.
+        <p className="text-[var(--body-text)] text-sm text-center">
+          © {year} {PROFILE.name}. Built with React, Tailwind, and a lot of coffee.
         </p>
         <div className="flex gap-4">
-          {obj.map(({ icon: Icon, href, color }, i) => (
+          {links.map(({ icon: Icon, href, label }) => (
             <a
-              key={i}
+              key={label}
               href={href}
-              className={`text-[var(--muted-text)] hover:text-white hover:border-[var(--accent-cyan)] transition-colors`}
+              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="text-[var(--muted-text)] hover:text-white transition-colors"
             >
               <Icon size={18} />
             </a>
