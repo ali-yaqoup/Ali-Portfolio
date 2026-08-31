@@ -101,7 +101,7 @@ const Navbar = () => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="xl:hidden overflow-hidden border-t border-white/10"
+              className="xl:hidden overflow-hidden border-t border-white/10 bg-[#070712]"
             >
               <div className="py-4 space-y-1">
                 {NAV_LINKS.map((link) => (
