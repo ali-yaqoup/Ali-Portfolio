@@ -1,5 +1,29 @@
 [
   {
+    "name": "Front End Web Developer Nanodegree",
+    "organization": "Udacity",
+    "year": "Mar 2026",
+    "verified": true,
+    "file": "certificates/frontend-nanodegree-udacity.pdf",
+    "href": "https://www.udacity.com/certificate/e/76016a14-70a2-11f0-a928-e7d11b601059"
+  },
+  {
+    "name": "Introduction to Generative AI with Google Cloud",
+    "organization": "Udacity · Google Cloud",
+    "year": "Jun 2026",
+    "verified": true,
+    "file": "certificates/generative-ai-google-cloud-udacity.pdf",
+    "href": "https://www.udacity.com/certificate/e/cd912bd4-6cfa-11f1-80cc-372a69821cef"
+  },
+  {
+    "name": "AWS AI Practitioner Challenge",
+    "organization": "Udacity",
+    "year": "Apr 2026",
+    "verified": true,
+    "file": "certificates/aws-ai-practitioner-udacity.jpg",
+    "href": "https://www.udacity.com/certificate/e/3ee27ef4-3101-11f1-a31b-23e039950ad8"
+  },
+  {
     "name": "Java Fundamentals",
     "organization": "DataCamp",
     "year": "Jan 2026",
