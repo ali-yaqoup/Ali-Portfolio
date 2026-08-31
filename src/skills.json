@@ -1,7 +1,7 @@
 [
   {
     "title": "Frontend Frameworks",
-    "skills": ["React", "React Native", "Expo", "Angular", "Bootstrap", "Tailwind CSS", "CSS3", "HTML5"]
+    "skills": ["React", "Next.js", "Vue", "React Native", "Expo", "Angular", "Bootstrap", "Tailwind CSS", "CSS3", "HTML5"]
   },
   {
     "title": "Programming Languages",
@@ -9,7 +9,7 @@
   },
   {
     "title": "Backend & Databases",
-    "skills": ["Node.js", "Express", "Laravel", "JavaFX", "MySQL", "Firebase"]
+    "skills": ["Node.js", "Express", "Laravel", "Next.js", "Supabase", "JavaFX", "MySQL", "Firebase"]
   },
   {
     "title": "Tools & Technologies",

@@ -1,5 +1,80 @@
 [
   {
+    "id": 12,
+    "title": "TWIST — Custom Apparel Store",
+    "description": "Premium Arabic RTL storefront for custom embroidery and print on apparel. Shoppers browse categories, products, wishlist and checkout; admins manage catalog, hero slides, gallery, orders and site content.",
+    "image": "projects/twist.jpg",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "RTL"
+    ],
+    "category": "fullstack",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/twist-store",
+    "demo": "#",
+    "startDate": "08/2026",
+    "status": "Completed"
+  },
+  {
+    "id": 13,
+    "title": "King Pizza — Digital Menu",
+    "description": "Arabic restaurant menu for King Pizza: pizza, sandwiches and sides with real product photos, sizes, prices, hours and WhatsApp-ready contact. Built as a fast static site and deployed on Vercel.",
+    "image": "projects/king-pizza.jpg",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "RTL"
+    ],
+    "category": "frontend",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/king-pizza-menu",
+    "demo": "https://king-pizza-menu.vercel.app",
+    "startDate": "08/2026",
+    "status": "Completed"
+  },
+  {
+    "id": 14,
+    "title": "EcoSwap — Cart & Checkout",
+    "description": "Vue 3 microfrontend for a second-hand marketplace. Cart with live totals, shipping form, credit-card or cash-on-delivery payment, and an order confirmation flow.",
+    "image": "projects/ecoswap.jpg",
+    "technologies": [
+      "Vue 3",
+      "Vite",
+      "Vuetify",
+      "Pinia",
+      "Vue Router"
+    ],
+    "category": "frontend",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/ecoswap-cart-checkout-vue",
+    "demo": "https://ecoswap-cart-checkout-vue.netlify.app/",
+    "startDate": "08/2026",
+    "status": "Completed"
+  },
+  {
+    "id": 15,
+    "title": "Graduate Book",
+    "description": "A personal digital graduation book. Friends open a unique link and write congratulations inside a 3D leather book, with a 2D fallback so the memory stays readable on any device.",
+    "image": "projects/graduation-book.jpg",
+    "technologies": [
+      "Next.js",
+      "Three.js",
+      "GSAP",
+      "Framer Motion",
+      "TypeScript"
+    ],
+    "category": "frontend",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/Graduation-Book",
+    "demo": "#",
+    "startDate": "08/2026",
+    "status": "In Progress"
+  },
+  {
     "id": 7,
     "title": "Lumixy - Service Provider Marketplace",
     "description": "React Native marketplace app connecting customers with local service providers. Customers browse approved providers by category, providers complete a multi-step onboarding and track approval status, and admins review applications.",
@@ -82,7 +157,7 @@
     "id": 10,
     "title": "Ali Portfolio Website",
     "description": "This portfolio: a responsive single-page site with an animated 3D background, scroll-driven motion, glassmorphism UI and a dark theme. Every section is driven from JSON data, so content stays easy to update.",
-    "image": "https://images.unsplash.com/photo-1558478551-1a378f63328e?w=600",
+    "image": "projects/portfolio.jpg",
     "technologies": [
       "React 18",
       "Vite",
