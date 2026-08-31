@@ -6,6 +6,12 @@ import projectsData from '../projects.json';
 
 const hasRealLink = (url) => Boolean(url) && url !== '#';
 
+const projectImage = (src) => {
+  if (!src) return '';
+  if (src.startsWith('http') || src.startsWith('data:')) return src;
+  return `${import.meta.env.BASE_URL}${src.replace(/^\//, '')}`;
+};
+
 const Projects = () => {
   const [filter, setFilter] = useState('all');
   const [viewMode, setViewMode] = useState('grid');
@@ -229,9 +235,9 @@ const ProjectCard = ({ project, index, viewMode }) => {
     >
       <div className="relative h-48 overflow-hidden">
         <img
-          src={project.image}
+          src={projectImage(project.image)}
           alt=""
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#070712] to-transparent opacity-70" />
         {project.featured && (
