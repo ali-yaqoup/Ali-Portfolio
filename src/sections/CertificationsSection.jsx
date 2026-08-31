@@ -34,8 +34,8 @@ export default function CertificationsSection() {
                 </div>
 
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold group-hover:text-indigo-300 transition-colors">{cert.name}</h3>
-                  <p className="text-slate-400 text-sm">{cert.organization}</p>
+                  <h3 className="text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors">{cert.name}</h3>
+                  <p className="text-slate-300 text-sm">{cert.organization}</p>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-indigo-300 text-sm font-medium">{cert.year}</span>
                     {cert.distinction ? (

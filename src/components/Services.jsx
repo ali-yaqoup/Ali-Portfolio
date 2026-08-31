@@ -4,7 +4,7 @@ import SectionHeading from './SectionHeading'
 import servicesData from '../services.json'
 import { Code2, TestTube2, Cpu, Database, Sparkles } from 'lucide-react'
 
-const iconMap = { Code2, TestTube2, Layers, Cpu, Database }
+const iconMap = { Code2, TestTube2, Cpu, Database }
 
 export default function Services() {
   return (
@@ -21,7 +21,7 @@ export default function Services() {
         </AnimatedSection>
 
         <StaggerChildren className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {servicesData.map((service, i) => {
+          {servicesData.map((service) => {
             const Icon = iconMap[service.icon]
             return (
               <TiltCard key={service.title} className="group glass rounded-2xl p-8 text-center hover:glow transition-all duration-500">

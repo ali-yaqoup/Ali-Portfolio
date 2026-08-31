@@ -12,7 +12,7 @@ const About = () => {
 
   const stats = [
     { icon: FolderGit2, value: `${projects.length}+`, label: 'Projects' },
-    { icon: Briefcase, value: `${internshipsData.length}`, label: 'Internships' },
+    { icon: Briefcase, value: `${internshipsData.length}`, label: internshipsData.length === 1 ? 'Internship' : 'Internships' },
     { icon: Award, value: `${certificationsData.length}`, label: 'Certificates' },
     { icon: GraduationCap, value: '4th', label: 'Year student' },
   ];
