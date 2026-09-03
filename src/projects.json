@@ -1,5 +1,25 @@
 [
   {
+    "id": 16,
+    "title": "FATEKIT — Luxury Beauty Store",
+    "description": "Arabic RTL luxury makeup and skincare store for the Palestinian market. Shoppers browse face, eyes, lips and skin products, wishlist and cash-on-delivery checkout; admins manage catalog, inventory, coupons, orders and homepage content.",
+    "image": "projects/fatekit.jpg",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Prisma",
+      "PostgreSQL",
+      "RTL"
+    ],
+    "category": "fullstack",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/FATEKIT",
+    "demo": "https://fatekitwebsite.vercel.app",
+    "startDate": "08/2026",
+    "status": "Completed"
+  },
+  {
     "id": 12,
     "title": "TWIST — Custom Apparel Store",
     "description": "Premium Arabic RTL storefront for custom embroidery and print on apparel. Shoppers browse categories, products, wishlist and checkout; admins manage catalog, hero slides, gallery, orders and site content.",
