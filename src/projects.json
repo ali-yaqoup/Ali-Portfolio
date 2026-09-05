@@ -1,5 +1,24 @@
 [
   {
+    "id": 17,
+    "title": "Taste — Restaurant Menu Template",
+    "description": "Reusable Arabic/English digital menu with a staff dashboard. Restaurants manage dishes, themes, stock and QR codes; guests browse the menu and place orders, with Firebase Auth and Firestore isolating each restaurant.",
+    "image": "projects/restaurant-menu.jpg",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Firebase",
+      "RTL"
+    ],
+    "category": "fullstack",
+    "featured": true,
+    "github": "https://github.com/ali-yaqoup/restaurant-menu-template",
+    "demo": "https://restaurant-menu-template-bice.vercel.app",
+    "startDate": "07/2026",
+    "status": "Completed"
+  },
+  {
     "id": 16,
     "title": "FATEKIT — Luxury Beauty Store",
     "description": "Arabic RTL luxury makeup and skincare store for the Palestinian market. Shoppers browse face, eyes, lips and skin products, wishlist and cash-on-delivery checkout; admins manage catalog, inventory, coupons, orders and homepage content.",
