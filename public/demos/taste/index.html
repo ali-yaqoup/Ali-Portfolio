@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="قائمة الطعام الرقمية — تصفح الأطباق واطلب مباشرة من التطبيق.">
+    <meta name="keywords" content="منيو رقمي, قائمة طعام, مطعم, طلب مباشر, برغر, بيتزا, حلويات, مشروبات">
+    <meta name="author" content="Taste Restaurant">
+    <title>مطعم تيست — قائمة الطعام الرقمية</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://taste-restaurant.github.io/">
+    <meta property="og:title" content="مطعم تيست — قائمة الطعام الرقمية">
+    <meta property="og:description" content="تصفح الأطباق واطلب مباشرة من التطبيق.">
+    <meta property="og:image" content="assets/logo-seal.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://taste-restaurant.github.io/">
+    <meta property="twitter:title" content="مطعم تيست — قائمة الطعام الرقمية">
+    <meta property="twitter:description" content="تصفح الأطباق واطلب مباشرة من التطبيق.">
+    <meta property="twitter:image" content="assets/logo-seal.jpg">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/logo-seal.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="assets/logo-seal.jpg">
+
+    <!-- Google Fonts: Amiri (عناوين) + Almarai (نصوص) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="styles.css?v=10">
+
+    <!-- Dynamic Color Styles Target -->
+    <style id="dynamic-theme-colors"></style>
+
+    <!-- Vercel Speed Insights -->
+    <script type="module">
+        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
+        injectSpeedInsights();
+    </script>
+</head>
+<body class="dark">
+<script>
+(function () {
+    var theme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+    document.documentElement.className = theme;
+    document.body.className = theme;
+})();
+</script>
+    <!-- Screen Loader -->
+    <div id="screen-loader" class="screen-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Expired Subscription Screen -->
+    <div id="expired-screen" class="expired-screen hidden">
+        <div class="expired-card">
+            <i class="fa-solid fa-triangle-exclamation expired-icon"></i>
+            <h2 data-translate="menuOfflineTitle">قائمة الطعام متوقفة مؤقتاً</h2>
+            <p data-translate="menuOfflineDesc">هذه القائمة متوقفة حالياً عن العمل. يرجى مراجعة إدارة المطعم.</p>
+        </div>
+    </div>
+
+    <!-- Background Decoration Grid & Blur -->
+    <div class="glow-bg">
+        <div class="glow-circle glow-circle-1"></div>
+        <div class="glow-circle glow-circle-2"></div>
+        <div class="glow-circle glow-circle-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="./" class="nav-brand">
+                <img id="nav-logo-img" src="assets/logo-seal.jpg" alt="شعار المطعم" class="nav-logo">
+                <span id="nav-brand-name" class="brand-text">مطعم تيست</span>
+            </a>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" class="btn-icon theme-toggle" type="button" aria-label="تبديل الوضع" title="تبديل الوضع">
+                    <i class="fa-solid fa-sun theme-icon" aria-hidden="true"></i>
+                </button>
+
+                <!-- Shopping Cart Button -->
+                <button id="cart-toggle" class="btn-icon cart-btn" aria-label="عرض الطلب" data-tooltip="تفاصيل الطلب" aria-expanded="false" aria-controls="cart-drawer">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <p class="hero-kicker animate-fade-in" data-translate="heroKicker">قائمة الطعام الرقمية</p>
+            <div class="hero-logo-container">
+                <div class="hero-logo-frame">
+                    <img id="hero-logo-img" src="assets/logo-seal.jpg" alt="شعار المطعم" class="hero-logo animate-fade-in">
+                </div>
+            </div>
+            <h1 id="hero-restaurant-name" class="restaurant-name animate-slide-up">مطعم تيست</h1>
+            <p id="hero-restaurant-slogan" class="restaurant-slogan animate-slide-up-delayed">طازج ولذيذ كل يوم</p>
+
+            <div class="gold-divider">
+                <span class="line"></span>
+                <span class="star"><i class="fa-solid fa-diamond"></i></span>
+                <span class="line"></span>
+            </div>
+
+            <!-- Search Bar + Filter -->
+            <div class="search-container animate-fade-in-delayed">
+                <div class="search-row">
+                    <div class="search-wrapper">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="menu-search" placeholder="ابحث عن طبق..." data-translate-placeholder="searchPlaceholder">
+                        <button id="search-clear" class="search-clear" aria-label="مسح البحث">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    <button id="filter-toggle" class="btn-filter" type="button" aria-label="تصفية حسب الفئة" aria-expanded="false" aria-controls="filter-modal">
+                        <svg class="btn-filter-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span data-translate="filterLabel">تصفية</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter Modal -->
+    <div id="filter-modal" class="filter-modal" role="dialog" aria-modal="true" aria-labelledby="filter-modal-title">
+        <div class="filter-modal-overlay"></div>
+        <div class="filter-modal-panel">
+            <div class="filter-modal-header">
+                <h3 id="filter-modal-title" data-translate="filterTitle">تصفية حسب الفئة</h3>
+                <button id="filter-modal-close" class="btn-icon" type="button" aria-label="إغلاق التصفية">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="filter-categories-list" class="filter-categories-list">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Menu Grid -->
+    <main class="menu-main">
+        <div class="container">
+            <!-- Dynamic Section Title -->
+            <div class="section-header">
+                <span class="section-flourish" aria-hidden="true"></span>
+                <h2 id="current-category-title" data-translate="catAll">القائمة الكاملة</h2>
+                <p id="items-count-display"><span id="items-count">0</span> <span data-translate="itemsFound">أطباق متوفرة</span></p>
+            </div>
+
+            <!-- Grid of Cards -->
+            <div id="menu-grid" class="menu-grid">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state hidden">
+                <i class="fa-solid fa-face-frown-open empty-icon"></i>
+                <h3 data-translate="noItemsTitle">لم يتم العثور على أطباق</h3>
+                <p data-translate="noItemsDesc">حاول البحث عن شيء آخر أو تصفح فئات أخرى.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Shopping Cart Drawer -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-overlay"></div>
+        <div class="cart-content" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
+            <div class="cart-header">
+                <div class="cart-header-title">
+                    <i class="fa-solid fa-receipt gold-text"></i>
+                    <h3 id="cart-drawer-title" data-translate="cartTitle">تفاصيل طلبك</h3>
+                </div>
+                <button id="cart-close" class="btn-icon" aria-label="إغلاق السلة">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="cart-body">
+                <div id="cart-items" class="cart-items">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <div id="cart-empty-state" class="cart-empty-state">
+                    <i class="fa-solid fa-basket-shopping cart-empty-icon"></i>
+                    <p data-translate="cartEmpty">سلة طلبك فارغة حالياً. أضف أطباقاً شهية من القائمة!</p>
+                </div>
+
+                <!-- Order submitted successfully -->
+                <div id="order-success" class="order-success hidden">
+                    <span class="order-success-icon"><i class="fa-solid fa-circle-check"></i></span>
+                    <h3>تم استلام طلبك! 🎉</h3>
+                    <p>وصل طلبك للمطعم مباشرة وسيتم تجهيزه بأقرب وقت. سنتواصل معك على رقمك عند الحاجة.</p>
+                </div>
+            </div>
+
+            <div class="cart-footer is-empty">
+                <!-- Customer details -->
+                <div class="order-form">
+                    <div class="order-form-row">
+                        <input type="text" id="order-name" class="order-input" placeholder="الاسم *" autocomplete="name" maxlength="80">
+                        <input type="tel" id="order-phone" class="order-input" placeholder="رقم الهاتف *" autocomplete="tel" dir="ltr" maxlength="30">
+                    </div>
+                    <input type="text" id="order-note" class="order-input" placeholder="ملاحظات إضافية (اختياري)" maxlength="300">
+                    <p id="order-form-error" class="order-form-error hidden" role="alert"></p>
+                </div>
+
+                <div class="cart-summary">
+                    <div class="cart-total-row">
+                        <span data-translate="cartTotal">المجموع الإجمالي</span>
+                        <span id="cart-total-value">0.00 دينار</span>
+                    </div>
+                </div>
+                <button id="whatsapp-checkout" class="btn-whatsapp-checkout" type="button" disabled>
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span data-translate="sendWhatsAppOrder">تأكيد الطلب</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Order Button -->
+    <button id="floating-whatsapp-btn" class="floating-whatsapp-btn" aria-label="عرض طلبي" data-tooltip="طلبي">
+        <span class="pulse-ring"></span>
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span class="btn-badge hidden" id="floating-cart-badge">0</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand">
+                <img id="footer-logo-img" src="assets/logo-seal.jpg" alt="شعار المطعم" class="footer-logo">
+                <h3 id="footer-restaurant-name">مطعم تيست</h3>
+                <p id="footer-restaurant-slogan">تجربة طهي فاخرة معدة بشغف ومن أجود المكونات الطازجة.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="انستغرام" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/MaramiaCafeAndRestaurants" target="_blank" rel="noopener noreferrer" aria-label="فيسبوك" class="social-icon"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="تيك توك" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Hours Column -->
+            <div class="footer-col">
+                <h4 data-translate="workingHoursTitle">أوقات العمل</h4>
+                <ul class="hours-list">
+                    <li>
+                        <span data-translate="daysWeek">السبت - الجمعة</span>
+                        <span class="gold-text" id="footer-hours-val">12:00 ظهراً - 12:00 ليلاً</span>
+                    </li>
+                </ul>
+                <h4 class="contact-info-title" data-translate="contactTitle">اتصل بنا</h4>
+                <p class="contact-detail"><i class="fa-solid fa-phone gold-text"></i> <a id="footer-phone-link" href="tel:+970599123456" dir="ltr"><span id="footer-phone-val">+970 599 123 456</span></a></p>
+                <p class="contact-detail"><i class="fa-solid fa-envelope gold-text"></i> <a id="footer-email-link" href="mailto:info@tasterestaurant.com"><span id="footer-email-val">info@tasterestaurant.com</span></a></p>
+                <p class="contact-detail"><i class="fa-solid fa-location-dot gold-text"></i> <span id="footer-address-val">رام الله، فلسطين</span></p>
+            </div>
+
+            <!-- QR Code Column -->
+            <div class="footer-col qr-col">
+                <h4 data-translate="scanMenuTitle">امسح القائمة الرقمية</h4>
+                <p data-translate="scanMenuDesc">شارك هذه القائمة مع العائلة والأصدقاء عبر مسح هذا الكود.</p>
+                <div class="qr-container">
+                    <img id="qr-code-img" src="" alt="رمز QR للقائمة" class="qr-image">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 <span id="footer-copyright-name">مطعم تيست</span>. <span data-translate="copyright">جميع الحقوق محفوظة. صُمم بتميز لراحتكم.</span></p>
+            <p class="waytech-credit">
+                <span class="waytech-credit-inner">
+                    <span class="waytech-text">تصميم وتطوير</span>
+                    <img src="assets/way-tech-logo.svg" alt="WAY TECH" class="waytech-logo-lockup" loading="lazy">
+                </span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- App Logic Script (Type module to allow ES imports) -->
+    <script type="module" src="app.js?v=8"></script>
+</body>
+</html>
