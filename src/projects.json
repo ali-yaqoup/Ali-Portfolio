@@ -1,5 +1,24 @@
 [
   {
+    "id": 18,
+    "title": "Zain Delivery — Local Delivery",
+    "description": "Arabic RTL delivery marketplace for Kafr Haris and nearby villages. Shoppers browse King Pizza and Mutawa Mini Market, add to cart and pay cash on delivery with no account; a live admin dashboard receives orders and customers can track them.",
+    "image": "projects/zain-delivery.jpg",
+    "technologies": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "PWA",
+      "RTL"
+    ],
+    "category": "fullstack",
+    "featured": true,
+    "github": "#",
+    "demo": "https://zain-delivery.vercel.app",
+    "startDate": "09/2026",
+    "status": "Completed"
+  },
+  {
     "id": 17,
     "title": "Taste — Restaurant Menu Template",
     "description": "Reusable Arabic/English digital menu with a staff dashboard. Restaurants manage dishes, themes, stock and QR codes; guests browse the menu and place orders, with Firebase Auth and Firestore isolating each restaurant.",
