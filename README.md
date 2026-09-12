@@ -21,7 +21,7 @@ Check my portfolio online: [View Portfolio](https://ali-yaqoup.github.io/Ali-Por
 - **Services** - Full Stack, QA, Automation, Database Design
 - **Skills** - 7 categories: Programming Languages, Frontend, Backend, Databases, Tools & Technologies , AI & ML
 - **Projects** - 6 featured projects with GitHub/Behance links
-- **Internships** - Timeline of work experience (ITG Software, Inc.)
+- **Internships** - Training timeline (Oppotrain Frontend / fullstack certificate)
 - **Education** - Academic background (An-Najah University, DataCamp)
 - **Certifications** - Professional certifications with verification links
 - **Contact** - Email, phone, location, and social links
