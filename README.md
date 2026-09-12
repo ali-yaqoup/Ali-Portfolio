@@ -1,4 +1,4 @@
-# Ali- Portfolio Website
+﻿# Ali- Portfolio Website
 
 A modern, responsive 3D portfolio website showcasing my skills and experience as a Full Stack Engineer 
 ## Live Demo
@@ -42,42 +42,42 @@ Check my portfolio online: [View Portfolio](https://ali-yaqoup.github.io/Ali-Por
 ## Project Structure
 
 ```
-├── src/
-│   ├── components/
-│   │   ├── About.jsx
-│   │   ├── AnimatedSection.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Footer.jsx
-│   │   ├── Hero.jsx
-│   │   ├── MicroInteractions.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Scene3D.jsx
-│   │   ├── Services.jsx
-│   │   └── Skills.jsx
-│   │
-│   ├── sections/
-│   │   ├── CertificationsSection.jsx
-│   │   ├── EducationSection.jsx
-│   │   ├── InternshipsSection.jsx
-│   │
-│   ├── App.css
-│   ├── App.jsx
-│   ├── index.css
-│   ├── index.jsx
-│   ├── projects.json
-│   ├── services.json
-│   ├── skills.json
-│   ├── Timeline.css
-│   └── Timeline.jsx
-│
-├── public/
-│   └── profile.jpg
-│
-├── index.html
-├── tailwind.config.js
-├── vite.config.js
-└── package.json
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ components/
+â”‚   â”‚   â”œâ”€â”€ About.jsx
+â”‚   â”‚   â”œâ”€â”€ AnimatedSection.jsx
+â”‚   â”‚   â”œâ”€â”€ Contact.jsx
+â”‚   â”‚   â”œâ”€â”€ Footer.jsx
+â”‚   â”‚   â”œâ”€â”€ Hero.jsx
+â”‚   â”‚   â”œâ”€â”€ MicroInteractions.jsx
+â”‚   â”‚   â”œâ”€â”€ Navbar.jsx
+â”‚   â”‚   â”œâ”€â”€ Projects.jsx
+â”‚   â”‚   â”œâ”€â”€ Scene3D.jsx
+â”‚   â”‚   â”œâ”€â”€ Services.jsx
+â”‚   â”‚   â””â”€â”€ Skills.jsx
+â”‚   â”‚
+â”‚   â”œâ”€â”€ sections/
+â”‚   â”‚   â”œâ”€â”€ CertificationsSection.jsx
+â”‚   â”‚   â”œâ”€â”€ EducationSection.jsx
+â”‚   â”‚   â”œâ”€â”€ InternshipsSection.jsx
+â”‚   â”‚
+â”‚   â”œâ”€â”€ App.css
+â”‚   â”œâ”€â”€ App.jsx
+â”‚   â”œâ”€â”€ index.css
+â”‚   â”œâ”€â”€ index.jsx
+â”‚   â”œâ”€â”€ projects.json
+â”‚   â”œâ”€â”€ services.json
+â”‚   â”œâ”€â”€ skills.json
+â”‚   â”œâ”€â”€ Timeline.css
+â”‚   â””â”€â”€ Timeline.jsx
+â”‚
+â”œâ”€â”€ public/
+â”‚   â””â”€â”€ profile.jpg
+â”‚
+â”œâ”€â”€ index.html
+â”œâ”€â”€ tailwind.config.js
+â”œâ”€â”€ vite.config.js
+â””â”€â”€ package.json
 ```
 
 ## Run Locally
@@ -100,3 +100,9 @@ The app runs on `http://localhost:5000`
 - **LinkedIn**: [Ali Derar](https://www.linkedin.com/in/ali-derar-5679a8292)
 - **GitHub**: [ali-yaqoup](https://github.com/ali-yaqoup)
 
+
+## License & copyright
+
+Copyright © 2026 Ali Yaqoub. All rights reserved.
+
+This software and its contents are proprietary. Unauthorized copying, distribution, modification, or commercial use is prohibited without prior written permission from the copyright holder.
