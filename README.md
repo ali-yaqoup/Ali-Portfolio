@@ -1,9 +1,7 @@
-﻿# Ali- Portfolio Website
+# Ali Yaqoub Portfolio
 
 A modern, responsive 3D portfolio website showcasing my skills and experience as a Full Stack Engineer 
 ## Live Demo
-
-# Ali Yaqoup Portfolio
 
 Check my portfolio online: [View Portfolio](https://ali-yaqoup.github.io/Ali-Portfolio/)
 
@@ -100,9 +98,10 @@ The app runs on `http://localhost:5000`
 - **LinkedIn**: [Ali Derar](https://www.linkedin.com/in/ali-derar-5679a8292)
 - **GitHub**: [ali-yaqoup](https://github.com/ali-yaqoup)
 
-
 ## License & copyright
 
 Copyright © 2026 Ali Yaqoub. All rights reserved.
 
 This software and its contents are proprietary. Unauthorized copying, distribution, modification, or commercial use is prohibited without prior written permission from the copyright holder.
+
+See the [LICENSE](./LICENSE) file for the full notice.
