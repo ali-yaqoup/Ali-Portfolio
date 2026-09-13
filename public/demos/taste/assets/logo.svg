@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Taste Restaurant">
+  <rect width="200" height="200" fill="#100E0C"/>
+  <circle cx="100" cy="100" r="82" fill="none" stroke="#C6A15B" stroke-width="1.25"/>
+  <circle cx="100" cy="100" r="74" fill="none" stroke="#C6A15B" stroke-width="0.6" opacity="0.45"/>
+  <text x="100" y="132" text-anchor="middle" fill="#C6A15B" font-family="Georgia, 'Times New Roman', serif" font-size="108" font-style="italic">T</text>
+</svg>

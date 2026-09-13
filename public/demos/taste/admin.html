@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المطعم</title>
+    <link rel="shortcut icon" href="assets/logo-seal.jpg" type="image/jpeg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css">
+
+    
+    <!-- Admin Dashboard Styles -->
+    <link rel="stylesheet" href="admin.css?v=3">
+
+    <!-- Vercel Speed Insights -->
+    <script type="module">
+        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@2/dist/index.mjs';
+        injectSpeedInsights();
+    </script>
+</head>
+<body class="admin-body">
+
+    <!-- Screen Loader -->
+    <div id="admin-loader" class="admin-loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- 1. AUTHENTICATION SECTION (Login Screen) -->
+    <div id="login-container" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <p class="login-kicker">بوابة الإدارة</p>
+                <div class="login-logo-frame">
+                    <i class="fa-solid fa-utensils" aria-hidden="true"></i>
+                    <img src="assets/logo-seal.jpg" alt="" class="login-logo" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'">
+                </div>
+                <h2>لوحة التحكم</h2>
+                <p>إدارة القائمة والطلبات من مكان واحد</p>
+            </div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">البريد الإلكتروني</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        <input type="email" id="login-email" placeholder="admin@restaurant.com" autocomplete="email" dir="ltr" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">كلمة المرور</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+                        <button type="button" id="password-toggle" class="password-toggle" aria-label="إظهار كلمة المرور">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-aux">
+                    <button type="button" id="forgot-password-link" class="forgot-password-link">نسيت كلمة المرور؟</button>
+                </div>
+
+                <div id="login-error" class="login-error hidden" role="alert"></div>
+
+                <button type="submit" class="btn-admin-primary btn-login">
+                    <span>تسجيل الدخول</span>
+                    <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                </button>
+            </form>
+            <div class="login-footer">
+                <p><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> اتصال آمن ومحمي</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. MAIN DASHBOARD SECTION -->
+    <div id="dashboard-container" class="dashboard-container hidden">
+        
+        <!-- Mobile Header Bar -->
+        <header class="mobile-admin-header">
+            <button id="sidebar-toggle" class="sidebar-toggle-btn" aria-label="فتح القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="mobile-logo-text">لوحة التحكم</div>
+            <div class="mobile-user-status">
+                <i class="fa-solid fa-circle-user"></i>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <aside id="admin-sidebar" class="admin-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo-frame">
+                    <img id="sidebar-logo" src="assets/logo-seal.jpg" alt="شعار المطعم" class="brand-logo" onerror="this.style.display='none'">
+                </div>
+                <div class="brand-info">
+                    <h3 id="sidebar-brand-name">لوحة التحكم</h3>
+                    <span id="admin-user-role" class="user-badge">مدير</span>
+                </div>
+                <button id="sidebar-close" class="sidebar-close-btn" title="إغلاق القائمة" aria-label="إغلاق القائمة"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-tab="tab-overview">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>نظرة عامة</span>
+                </button>
+                <button class="nav-item" data-tab="tab-orders">
+                    <i class="fa-solid fa-bell-concierge"></i>
+                    <span>الطلبات</span>
+                    <span id="orders-badge" class="orders-badge hidden">0</span>
+                </button>
+                <button class="nav-item" data-tab="tab-categories">
+                    <i class="fa-solid fa-folder-tree"></i>
+                    <span>التصنيفات</span>
+                </button>
+                <button class="nav-item" data-tab="tab-items">
+                    <i class="fa-solid fa-utensils"></i>
+                    <span>الأصناف</span>
+                </button>
+                <button class="nav-item" data-tab="tab-settings">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>إعدادات المطعم</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <i class="fa-solid fa-circle-user avatar-icon"></i>
+                    <span id="user-email-display">admin@taste.com</span>
+                </div>
+                <button id="logout-btn" class="btn-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Panel Content -->
+        <main class="admin-main-panel">
+            
+            <!-- A. Overview Dashboard Tab -->
+            <section id="tab-overview" class="tab-content active">
+                <div class="panel-header">
+                    <h2>نظرة عامة</h2>
+                    <p>أرقام مباشرة من قائمتك وطلباتك.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-eye"></i></div>
+                        <div class="stat-data">
+                            <span class="stat-label">إجمالي المشاهدات</span>
+                            <h3 id="stat-total-views">0</h3>
+                        </div>
+                        <button type="button" id="reset-analytics-btn" class="stat-reset-btn" title="تصفير العدادات" aria-label="تصفير العدادات" data-staff-lock>
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-bell-concierge"></i></div>
+                        <div class="stat-data">
+                            <span class="stat-label">إجمالي الطلبات</span>
+                            <h3 id="stat-total-orders">0</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="stat-data">
+                            <span class="stat-label">الأصناف المتوفرة</span>
+                            <h3 id="stat-active-items">0</h3>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-wrapper billing-icon"><i class="fa-solid fa-award"></i></div>
+                        <div class="stat-data">
+                            <span class="stat-label">حالة الاشتراك</span>
+                            <h3 id="stat-subscription-status" class="status-badge-active">تجريبي</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Views Charts / List -->
+                <div class="dashboard-row">
+                    <div class="dashboard-col col-8">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>الأطباق الأكثر طلباً</h3>
+                                <p>الأطباق الأعلى طلباً من الزبائن عبر المنيو.</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th>اسم الطبق</th>
+                                                <th>التصنيف</th>
+                                                <th>السعر</th>
+                                                <th>نقرات الطلب</th>
+                                                <th>المشاهدات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="popular-items-list">
+                                            <!-- Dynamically populated -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-col col-4">
+                        <div class="dashboard-card quick-qr-card">
+                            <div class="card-header">
+                                <h3>رمز QR الخاص بك</h3>
+                                <p>اطبع أو حمّل رمز QR لقائمتك الرقمية.</p>
+                            </div>
+                            <div class="card-body qr-panel-body">
+                                <div class="qr-preview-container">
+                                    <img id="admin-qr-img" src="" alt="رمز QR للمنيو">
+                                </div>
+                                <button id="download-qr-btn" class="btn-admin-secondary btn-full">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>تحميل QR بجودة عالية</span>
+                                </button>
+                                <a id="view-live-menu-btn" href="#" target="_blank" class="btn-admin-primary btn-full mt-10">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    <span>عرض المنيو المباشر</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- A2. Orders Tab -->
+            <section id="tab-orders" class="tab-content">
+                <div class="panel-header flex-header">
+                    <div>
+                        <h2>الطلبات الواردة</h2>
+                        <p>طلبات الزبائن تصل هنا لحظياً — حدّث حالة كل طلب أثناء التحضير.</p>
+                    </div>
+                    <div class="header-actions">
+                        <select id="orders-status-filter" class="admin-select select-inline" title="تصفية الطلبات حسب الحالة" aria-label="تصفية الطلبات حسب الحالة">
+                            <option value="all">كل الطلبات</option>
+                            <option value="new">جديد</option>
+                            <option value="preparing">قيد التحضير</option>
+                            <option value="done">مكتمل</option>
+                            <option value="cancelled">ملغي</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="orders-list" class="orders-list">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </section>
+
+            <!-- B. Categories Tab -->
+            <section id="tab-categories" class="tab-content">
+                <div class="panel-header flex-header">
+                    <div>
+                        <h2>إدارة التصنيفات</h2>
+                        <p>أنشئ التصنيفات وعدّلها واحذفها، واسحب الصفوف لإعادة ترتيبها.</p>
+                    </div>
+                    <button class="btn-admin-primary" onclick="openAddCategoryModal()">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>إضافة تصنيف</span>
+                    </button>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th class="table-col-sort">ترتيب</th>
+                                        <th>المعرّف</th>
+                                        <th>الاسم</th>
+                                        <th class="table-col-actions">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="categories-table-body" class="sortable-target">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- C. Menu Items Tab -->
+            <section id="tab-items" class="tab-content">
+                <div class="panel-header flex-header">
+                    <div>
+                        <h2>إدارة الأصناف</h2>
+                        <p>أنشئ الأصناف وعدّلها وكرّرها وبدّل حالة توفرها، واسحب الصفوف لإعادة ترتيبها.</p>
+                    </div>
+                    <div class="header-actions">
+                        <select id="items-category-filter" class="admin-select select-inline" title="تصفية الأصناف حسب التصنيف" aria-label="تصفية الأصناف حسب التصنيف">
+                            <option value="all">كل التصنيفات</option>
+                            <!-- Dynamically populated options -->
+                        </select>
+                        <button class="btn-admin-primary" onclick="openAddItemModal()">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>إضافة صنف</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th class="table-col-sort">ترتيب</th>
+                                        <th class="table-col-image">الصورة</th>
+                                        <th>الاسم</th>
+                                        <th>التصنيف</th>
+                                        <th>السعر</th>
+                                        <th class="table-col-status">الحالة</th>
+                                        <th class="table-col-actions">إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="items-table-body" class="sortable-target">
+                                    <!-- Populated dynamically via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- D. Settings Tab -->
+            <section id="tab-settings" class="tab-content">
+                <div class="panel-header">
+                    <h2>إعدادات المطعم</h2>
+                    <p>خصّص الهوية وساعات العمل والألوان الأساسية.</p>
+                </div>
+
+                <form id="settings-form">
+                    <div class="settings-grid">
+                        
+                        <!-- Left Block: Core fields -->
+                        <div class="settings-column">
+                            <div class="dashboard-card mb-24">
+                                <div class="card-header"><h3>الإعدادات العامة</h3></div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-6 en-field">
+                                            <label for="settings-name-en">Restaurant Name (English)</label>
+                                            <input type="text" id="settings-name-en" class="admin-input">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-name-ar">اسم المطعم</label>
+                                            <input type="text" id="settings-name-ar" class="admin-input" required dir="rtl">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-6 en-field">
+                                            <label for="settings-slogan-en">Slogan (English)</label>
+                                            <input type="text" id="settings-slogan-en" class="admin-input">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-slogan-ar">الشعار (السلوغان)</label>
+                                            <input type="text" id="settings-slogan-ar" class="admin-input" dir="rtl">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-6">
+                                            <label for="settings-whatsapp">رقم واتساب استقبال الطلبات</label>
+                                            <input type="text" id="settings-whatsapp" class="admin-input" placeholder="+970599123456" dir="ltr" required>
+                                            <small class="form-tip">يجب أن يتضمن الرمز الدولي (مثال: ‎+970599123456)</small>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-email">البريد الإلكتروني للتواصل</label>
+                                            <input type="email" id="settings-email" class="admin-input" placeholder="info@tasterestaurant.com" dir="ltr">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-6 en-field">
+                                            <label for="settings-hours-en">Working Hours (English)</label>
+                                            <input type="text" id="settings-hours-en" class="admin-input" placeholder="Saturday - Friday (12:00 PM - 12:00 AM)">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-hours-ar">ساعات العمل</label>
+                                            <input type="text" id="settings-hours-ar" class="admin-input" placeholder="السبت - الجمعة (12:00 ظهراً - 12:00 ليلاً)" dir="rtl">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-6 en-field">
+                                            <label for="settings-currency-en">Currency Abbr (English)</label>
+                                            <input type="text" id="settings-currency-en" class="admin-input" placeholder="JD">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-currency-ar">العملة</label>
+                                            <input type="text" id="settings-currency-ar" class="admin-input" placeholder="دينار" required dir="rtl">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-6 en-field">
+                                            <label for="settings-address-en">Address (English)</label>
+                                            <input type="text" id="settings-address-en" class="admin-input" placeholder="Ramallah, Palestine">
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-address-ar">العنوان</label>
+                                            <input type="text" id="settings-address-ar" class="admin-input" placeholder="رام الله، فلسطين" dir="rtl">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Block: Styling & Logo upload & Portability -->
+                        <div class="settings-column">
+                            <!-- Logo and Style -->
+                            <div class="dashboard-card mb-24">
+                                <div class="card-header"><h3>الهوية والألوان</h3></div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="settings-logo-url">رابط شعار المطعم</label>
+                                        <div class="logo-upload-wrapper">
+                                            <img id="settings-logo-preview" src="" alt="معاينة الشعار" class="logo-preview-box" hidden>
+                                            <div class="logo-upload-actions">
+                                                <input type="text" id="settings-logo-url" class="admin-input" placeholder="الصق رابط صورة الشعار هنا" dir="ltr">
+                                                <span class="file-info">أدخل رابطاً مباشراً لصورة الشعار.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="logoFile">رفع الشعار (قصّ ثم رفع)</label>
+                                        <div class="logo-upload-actions">
+                                            <input type="file" id="logoFile" class="admin-input" accept="image/*">
+                                            <span class="file-info">اختر صورة، قصّها، ثم ارفعها.</span>
+                                        </div>
+                                        <div id="logoUploadStatus" class="form-tip" role="status" aria-live="polite"></div>
+                                        <img id="logoPreview" alt="معاينة الشعار" class="logo-preview-box logo-live-preview" hidden>
+                                        <div id="cropContainer" class="logo-crop-container" style="display:none;">
+                                            <img id="cropImage" alt="قصّ الشعار">
+                                            <button type="button" id="cropConfirm" class="btn-admin-primary">
+                                                <i class="fa-solid fa-crop"></i>
+                                                <span>تأكيد القصّ</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="settings-subscription-status">حالة الاشتراك</label>
+                                        <select id="settings-subscription-status" class="admin-select">
+                                            <option value="active">فعّال</option>
+                                            <option value="trial">تجريبي</option>
+                                            <option value="expired">منتهي</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-6">
+                                            <label for="settings-portal-role">الدور والصلاحية</label>
+                                            <select id="settings-portal-role" class="admin-select">
+                                                <option value="super_admin">مدير عام</option>
+                                                <option value="restaurant_admin">مدير المطعم</option>
+                                                <option value="staff_editor">محرر محتوى</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="settings-custom-domain">دومين مخصص</label>
+                                            <input type="text" id="settings-custom-domain" class="admin-input" placeholder="https://menu.example.com" dir="ltr">
+                                            <small class="form-tip">محجوز لربط دومين مخصص مستقبلاً.</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="checkbox-label-block" for="settings-dark-mode">الوضع الداكن للوحة</label>
+                                        <div class="toggle-switch-wrapper">
+                                            <input type="checkbox" id="settings-dark-mode" checked>
+                                            <label for="settings-dark-mode" class="toggle-slider-btn"></label>
+                                            <span class="toggle-label-text">مفعّل</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="color-picker-row">
+                                        <div class="color-picker-item">
+                                            <label for="settings-color-bg">الخلفية</label>
+                                            <input type="color" id="settings-color-bg" value="#0A0A0A">
+                                        </div>
+                                        <div class="color-picker-item">
+                                            <label for="settings-color-surface">خلفية البطاقات</label>
+                                            <input type="color" id="settings-color-surface" value="#121212">
+                                        </div>
+                                        <div class="color-picker-item">
+                                            <label for="settings-color-gold">اللون الذهبي</label>
+                                            <input type="color" id="settings-color-gold" value="#D4AF37">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Data portability -->
+                            <div class="dashboard-card">
+                                <div class="card-header"><h3>النسخ الاحتياطي ونقل البيانات</h3></div>
+                                <div class="card-body backups-panel">
+                                    <p class="section-tip">صدّر المنيو كاملاً (الأصناف والتصنيفات) كملف JSON واحد، أو استعد البيانات من ملف تصدير صالح.</p>
+                                    <div class="backup-actions">
+                                        <button type="button" id="btn-export-json" class="btn-admin-secondary">
+                                            <i class="fa-solid fa-download"></i>
+                                            <span>تصدير المنيو (JSON)</span>
+                                        </button>
+                                        <input type="file" id="import-json-input" class="hidden-input" accept=".json" aria-label="استيراد المنيو (JSON)" title="استيراد المنيو (JSON)">
+                                        <button type="button" id="btn-import-json" class="btn-admin-secondary" onclick="document.getElementById('import-json-input').click()">
+                                            <i class="fa-solid fa-upload"></i>
+                                            <span>استيراد المنيو (JSON)</span>
+                                        </button>
+                                    </div>
+                                    <button type="button" id="btn-db-backup" class="btn-admin-secondary btn-full mt-10">
+                                      <i class="fa-solid fa-database"></i>
+                                      <span>إنشاء نسخة احتياطية سحابية</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sticky Save Bar -->
+                    <div class="settings-save-bar">
+                        <button type="submit" class="btn-admin-primary">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            <span>حفظ الإعدادات</span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- ==========================================================================
+       MODALS SECTION
+       ========================================================================== -->
+
+    <!-- A. Item Form Modal (Add / Edit) -->
+    <div id="modal-item" class="modal-overlay">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3 id="item-modal-title">إضافة صنف جديد</h3>
+                <button class="modal-close-btn" title="إغلاق" aria-label="إغلاق" onclick="closeItemModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="item-form">
+                <input type="hidden" id="item-edit-id">
+                <div class="modal-body">
+                    
+                    <!-- Names row -->
+                    <div class="form-row">
+                        <div class="form-group col-6 en-field">
+                            <label for="item-name-en">Dish Name (English)</label>
+                            <input type="text" id="item-name-en" class="admin-input" placeholder="e.g. Truffle Burger">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="item-name-ar">اسم الطبق</label>
+                            <input type="text" id="item-name-ar" class="admin-input" placeholder="مثال: برغر الترافل" required dir="rtl">
+                        </div>
+                    </div>
+
+                    <!-- Descriptions row -->
+                    <div class="form-row">
+                        <div class="form-group col-6 en-field">
+                            <label for="item-desc-en">Description (English)</label>
+                            <textarea id="item-desc-en" class="admin-textarea" rows="3" placeholder="Describe the ingredients..."></textarea>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="item-desc-ar">الوصف</label>
+                            <textarea id="item-desc-ar" class="admin-textarea" rows="3" placeholder="وصف المكونات والنكهة..." required dir="rtl"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Category and Price row -->
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label for="item-category">التصنيف</label>
+                            <select id="item-category" class="admin-select" required>
+                                <!-- Categories loaded dynamically -->
+                            </select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="item-price">السعر</label>
+                            <input type="number" id="item-price" class="admin-input" step="0.01" min="0" placeholder="8.00" required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="item-available" class="checkbox-label-block">حالة التوفر</label>
+                            <div class="toggle-switch-wrapper">
+                                <input type="checkbox" id="item-available" checked>
+                                <label for="item-available" class="toggle-slider-btn"></label>
+                                <span class="toggle-label-text">متوفر</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags row -->
+                    <div class="form-row">
+                        <div class="form-group col-6 en-field">
+                            <label for="item-tags-en">Tags (English) - Comma Separated</label>
+                            <input type="text" id="item-tags-en" class="admin-input" placeholder="e.g. New, Spicy, Chef Special">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="item-tags-ar">الوسوم (افصل بينها بفاصلة)</label>
+                            <input type="text" id="item-tags-ar" class="admin-input" placeholder="مثال: جديد، حار، مميز" dir="rtl">
+                        </div>
+                    </div>
+
+                    <!-- Image URL -->
+                    <div class="form-group">
+                        <label for="imageUrl">رابط صورة الطبق</label>
+                        <div class="dish-image-picker">
+                            <img id="item-img-preview" src="" alt="صورة الصنف" class="item-img-preview-box" hidden>
+                            <div class="image-picker-actions">
+                                <input type="text" id="imageUrl" class="admin-input" placeholder="الصق رابط الصورة هنا" dir="ltr">
+                                <span class="file-info">أدخل رابطاً مباشراً لصورة الطبق.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-admin-secondary" onclick="closeItemModal()">إلغاء</button>
+                    <button type="submit" class="btn-admin-primary">
+                        <i class="fa-solid fa-check"></i>
+                        <span>حفظ الصنف</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- B. Category Form Modal (Add / Edit) -->
+    <div id="modal-category" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="category-modal-title">إضافة تصنيف</h3>
+                <button class="modal-close-btn" title="إغلاق" aria-label="إغلاق" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="category-form">
+                <input type="hidden" id="category-edit-id">
+                <input type="hidden" id="category-order-index">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="category-id-val">المعرّف الفريد (لاتيني للرابط)</label>
+                        <input type="text" id="category-id-val" class="admin-input" placeholder="مثال: burgers" dir="ltr" required>
+                        <small class="form-tip">أحرف لاتينية صغيرة وأرقام فقط (مثال: burgers، drinks)</small>
+                    </div>
+
+                    <div class="form-group en-field">
+                        <label for="category-name-en">Category Name (English)</label>
+                        <input type="text" id="category-name-en" class="admin-input" placeholder="e.g. Burgers">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category-name-ar">اسم التصنيف</label>
+                        <input type="text" id="category-name-ar" class="admin-input" placeholder="مثال: البرغر" required dir="rtl">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-admin-secondary" onclick="closeCategoryModal()">إلغاء</button>
+                    <button type="submit" class="btn-admin-primary">
+                        <i class="fa-solid fa-check"></i>
+                        <span>حفظ التصنيف</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- D. Custom Styled Confirmation Modal -->
+    <div id="modal-confirm" class="modal-overlay modal-confirm-overlay">
+        <div class="modal-card modal-confirm-card">
+            <div class="modal-body text-center">
+                <i class="fa-solid fa-circle-exclamation warning-icon"></i>
+                <h3 id="confirm-title">هل أنت متأكد؟</h3>
+                <p id="confirm-message">لا يمكن التراجع عن هذا الإجراء.</p>
+            </div>
+            <div class="modal-footer flex-center">
+                <button type="button" id="confirm-cancel-btn" class="btn-admin-secondary">إلغاء</button>
+                <button type="button" id="confirm-action-btn" class="btn-admin-danger">حذف</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Controller Logic -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
+    <script>
+      window.CLOUDINARY_CLOUD_NAME = "t94xf7rb";
+      window.CLOUDINARY_UPLOAD_PRESET = "menu_test";
+    </script>
+    <script>
+      // Password visibility toggle (login screen)
+      (function () {
+        var toggle = document.getElementById('password-toggle');
+        var input = document.getElementById('login-password');
+        if (!toggle || !input) return;
+        toggle.addEventListener('click', function () {
+          var show = input.type === 'password';
+          input.type = show ? 'text' : 'password';
+          toggle.setAttribute('aria-label', show ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
+          var icon = toggle.querySelector('i');
+          if (icon) {
+            icon.classList.toggle('fa-eye', !show);
+            icon.classList.toggle('fa-eye-slash', show);
+          }
+        });
+      })();
+    </script>
+    <script type="module" src="admin.js?v=9"></script>
+</body>
+</html>
